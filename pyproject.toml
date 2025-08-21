@@ -19,7 +19,10 @@ pydantic-settings = ">=2.10.1,<3.0.0"
  
 [tool.poetry.group.dev.dependencies]
 black = "^25.1.0"
- 
+
+[tool.dagster]
+module_name = "hhs_platform.definitions"
+
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"

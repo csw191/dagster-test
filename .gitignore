@@ -9,7 +9,7 @@ target/
 dbt_packages/
 logs/
 dbt.log
-.dbt/
+# .dbt/
 
 # dbt profiles (contains sensitive connection info)
 profiles.yml

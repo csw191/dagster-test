@@ -5,7 +5,16 @@ RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
     && rm -rf /var/lib/apt/lists/*
- 
+
+# Add these lines to your Dockerfile
+RUN mkdir -p /root/.dbt
+RUN mkdir -p /opt/dagster/dagster_home
+RUN mkdir -p /home/jparep/proj/dbt/dagster-test/dagster_home
+
+# Copy your local dbt profiles 
+COPY .dbt/profiles.yml /root/.dbt/profiles.yml
+
+
 # Install Poetry
 RUN pip install poetry==1.8.3
  
@@ -23,7 +32,9 @@ COPY pyproject.toml poetry.lock ./
 RUN poetry config virtualenvs.create false && \
     poetry install --only=main && \
     rm -rf $POETRY_CACHE_DIR
- 
+
+
+
 # Copy application code
 COPY . .
  

@@ -39,16 +39,32 @@ class HHSConfig(BaseSettings):
     dbt_target: str = Field(default="dev", env="DBT_TARGET")
     
     # FIXED: Update DAGSTER_HOME path for dagster-test
+    # def __init__(self, **kwargs):
+    #     super().__init__(**kwargs)
+    #     # Override DAGSTER_HOME environment variable
+    #     correct_dagster_home = "/home/jparep/proj/dbt/dagster-test/dagster_home"  # Updated path
+    #     os.environ["DAGSTER_HOME"] = correct_dagster_home
+    #     print(f"FORCED DAGSTER_HOME to: {correct_dagster_home}")
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        # Override DAGSTER_HOME environment variable
-        correct_dagster_home = "/home/jparep/proj/dbt/dagster-test/dagster_home"  # Updated path
-        os.environ["DAGSTER_HOME"] = correct_dagster_home
-        print(f"FORCED DAGSTER_HOME to: {correct_dagster_home}")
-    
+        # Simply use whatever DAGSTER_HOME is set to, don't override it
+        dagster_home = os.getenv('DAGSTER_HOME')
+        if dagster_home:
+            print(f"Using DAGSTER_HOME from environment: {dagster_home}")
+        else:
+            # Only set default if nothing is provided
+            dagster_home = '/home/jparep/proj/dbt/dagster-test/dagster_home'
+            os.environ["DAGSTER_HOME"] = dagster_home
+            print(f"Using default DAGSTER_HOME: {dagster_home}")
+        
+    # @property
+    # def dagster_home(self) -> str:
+    #     return "/home/jparep/proj/dbt/dagster-test/dagster_home"  # Updated path
     @property
     def dagster_home(self) -> str:
-        return "/home/jparep/proj/dbt/dagster-test/dagster_home"  # Updated path
+        return os.getenv('DAGSTER_HOME', '/home/jparep/proj/dbt/dagster-test/dagster_home')
+
     
     @property
     def data_sources(self) -> Dict[str, str]:
@@ -96,5 +112,6 @@ class HHSConfig(BaseSettings):
 config = HHSConfig()
  
 # Additional safety check - force override the environment variable at module level
-os.environ["DAGSTER_HOME"] = "/home/jparep/proj/dbt/dagster-test/dagster_home"  # Updated path
+if not os.environ.get("DAGSTER_HOME"):
+    os.environ["DAGSTER_HOME"] = "/home/jparep/proj/dbt/dagster-test/dagster_home"
 print(f"Final DAGSTER_HOME: {os.environ.get('DAGSTER_HOME')}")
