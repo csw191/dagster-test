@@ -86,7 +86,7 @@ def pipeline_health_monitor(context: AssetExecutionContext) -> Dict[str, Any]:
         "health_score": MetadataValue.float(98.5),
         "data_sources": MetadataValue.int(len(config.data_sources)),
         "environment": MetadataValue.text(config.environment),
-        "monitoring_time": MetadataValue.timestamp(context.run_id),
+        "monitoring_time": MetadataValue.text(str(context.run_id)),
         "platform_status": MetadataValue.text("healthy")
     })
     
@@ -118,7 +118,7 @@ def data_quality_summary(context: AssetExecutionContext) -> Dict[str, Any]:
         "quality_score": MetadataValue.float(95.0),
         "sources_monitored": MetadataValue.int(len(config.data_sources)),
         "framework": MetadataValue.text("modern_observability_2025"),
-        "assessment_time": MetadataValue.timestamp(context.run_id)
+        "assessment_time": MetadataValue.text(str(context.run_id))
     })
     
     context.log.info(f"📊 Data quality assessment completed: {quality_summary}")

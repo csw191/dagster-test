@@ -368,3 +368,9 @@ Thumbs.db
 # Environment files
 .env.local
 .env.*.local
+
+
+# AWS
+aws/
+aws/snowflake-secret.json
+aws/dagster-service.json
