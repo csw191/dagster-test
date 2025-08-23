@@ -1,1 +1,3 @@
-# ECIDS DBT Proejct
+# ECIDS DBT Project
+
+- Snowflake + DBT Core + Dagster
