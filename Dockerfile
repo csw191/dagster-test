@@ -11,20 +11,21 @@ RUN mkdir -p /root/.dbt
 RUN mkdir -p /opt/dagster/dagster_home
 RUN mkdir -p /home/jparep/proj/dbt/dagster-test/dagster_home
 
-RUN cat > /root/.dbt/profiles.yml << 'EOF'
-default:
-  outputs:
-    dev:
-      type: snowflake
-      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
-      user: "{{ env_var('SNOWFLAKE_USER') }}"
-      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
-      role: "{{ env_var('SNOWFLAKE_ROLE') }}"
-      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}"
-      database: "{{ env_var('SNOWFLAKE_DATABASE') }}"
-      schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}"
-  target: dev
+RUN cat > /root/.dbt/profiles.yml << 'EOF' && \
+default: \
+  outputs: \
+    dev: \
+      type: snowflake \
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}" \
+      user: "{{ env_var('SNOWFLAKE_USER') }}" \
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}" \
+      role: "{{ env_var('SNOWFLAKE_ROLE') }}" \
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE') }}" \
+      database: "{{ env_var('SNOWFLAKE_DATABASE') }}" \
+      schema: "{{ env_var('SNOWFLAKE_SCHEMA') }}" \
+  target: dev \
 EOF
+
 
 
 
