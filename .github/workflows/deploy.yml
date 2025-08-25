@@ -3,6 +3,11 @@ name: Deploy to AWS Fargate
 on:
   push:
     branches: [ main ]
+    
+# ADD THIS PERMISSIONS SECTION
+permissions:
+  contents: read
+  packages: write  # This is the missing permission!
  
 env:
   AWS_REGION: us-east-1

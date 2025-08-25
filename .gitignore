@@ -279,8 +279,8 @@ output/
 results/
 
 # Temporary files
-tmp/
-temp/
+# tmp/
+# temp/
 .tmp/
 
 # CUSTOM PROJECT SPECIFIC
