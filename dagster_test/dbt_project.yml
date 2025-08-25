@@ -50,7 +50,7 @@ vars:
 
 # Model Configuration
 models:
-  dagster_test:
+  dagster_test: # project name
     staging:
       +materialized: view
       +schema: STAGING
