@@ -50,7 +50,7 @@ vars:
 
 # Model Configuration
 models:
-  ecids_test:
+  dagster_test:
     staging:
       +materialized: view
       +schema: STAGING
