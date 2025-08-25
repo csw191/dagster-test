@@ -3,7 +3,7 @@ name: Deploy to AWS Fargate
 on:
   push:
     branches: [ main ]
-    
+
 # ADD THIS PERMISSIONS SECTION
 permissions:
   contents: read
@@ -37,7 +37,7 @@ jobs:
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ secrets.GHCR_TOKEN }}
  
     - name: Build, tag, and push image to GitHub Container Registry
       env:
